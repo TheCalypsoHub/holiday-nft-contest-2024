@@ -1,0 +1,18 @@
+[profile.default]
+solc-version = '0.8.24'
+evm_compiler = "shanghai"
+out = 'out'
+cache_path = 'cache/foundry'
+verbosity = 3
+libs = [
+    'lib',
+    'node_modules'
+]
+
+remappings = [
+    '@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/'
+]
+
+
+[fuzz]
+runs = 1000

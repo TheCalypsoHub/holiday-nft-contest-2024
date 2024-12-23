@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+  <defs>
+    <style>
+      .tree { fill: #0a7300; }
+      .star { fill: #ffd700; }
+      .trunk { fill: #8b5e3c; }
+      .ornament-line { stroke: #ccc; stroke-width: 2px; }
+    </style>
+  </defs>
+  <!-- Christmas Tree -->
+  <polygon class="tree" points="200,20 240,100 160,100 200,20"/>
+  <polygon class="tree" points="200,80 260,160 140,160 200,80"/>
+  <polygon class="tree" points="200,140 280,240 120,240 200,140"/>
+  <polygon class="tree" points="200,220 300,320 100,320 200,220"/>
+  <!-- Tree Trunk -->
+  <rect class="trunk" x="180" y="320" width="40" height="50"/>
+  <!-- Star -->
+  <polygon class="star" points="200,0 208,15 225,15 211,25 217,40 200,30 183,40 189,25 175,15 192,15"/>
+  <!-- Ornament -->
+  <line class="ornament-line" x1="170" y1="150" x2="170" y2="190"/>
+  <g transform="translate(150,190) scale(0.15)">
+    <!-- Inserted Logo -->
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 352.5 352.5">
+      <defs>
+        <style>
+          .cls-1{fill:url(#linear-gradient);}
+          .cls-2{fill:#f11387;}
+          .cls-2,.cls-4{stroke:#e6e6e6;stroke-miterlimit:10;}
+          .cls-3{opacity:0.85;fill:url(#radial-gradient);}
+          .cls-4{fill:#8375aa;stroke-width:0.25px;}
+          .cls-5{fill:#fff;}
+        </style>
+        <linearGradient id="linear-gradient" x1="387.69" y1="29.25" x2="-32.74" y2="321.55" gradientUnits="userSpaceOnUse">
+          <stop offset="0.04" stop-color="#fff"/>
+          <stop offset="0.06" stop-color="#faf4f7"/>
+          <stop offset="0.16" stop-color="#ddb2c9"/>
+          <stop offset="0.26" stop-color="#c67da4"/>
+          <stop offset="0.34" stop-color="#b65889"/>
+          <stop offset="0.4" stop-color="#ac4079"/>
+          <stop offset="0.44" stop-color="#a83873"/>
+          <stop offset="0.65" stop-color="#853778"/>
+          <stop offset="1" stop-color="#4e3680"/>
+        </linearGradient>
+        <radialGradient id="radial-gradient" cx="173.99" cy="176.97" r="160.76" gradientUnits="userSpaceOnUse">
+          <stop offset="0.07" stop-color="#a83873"/>
+          <stop offset="0.53" stop-color="#a13672"/>
+          <stop offset="0.62" stop-color="#742b6d"/>
+          <stop offset="0.71" stop-color="#471f68"/>
+          <stop offset="0.79" stop-color="#2b1965"/>
+          <stop offset="0.84" stop-color="#211664"/>
+          <stop offset="0.96" stop-color="#1e1564"/>
+        </radialGradient>
+      </defs>
+      <g id="Layer_2" data-name="Layer 2">
+        <g id="LOGO_03" data-name="LOGO 03">
+          <circle class="cls-1" cx="176.25" cy="176.25" r="176.25"/>
+          <!-- Additional paths and elements of the logo -->
+        </g>
+      </g>
+    </svg>
+  </g>
+</svg>

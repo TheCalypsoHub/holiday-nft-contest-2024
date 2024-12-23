@@ -1,0 +1,113 @@
+.navbar {
+    background: #0E1111;
+    width: 100vw;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    height: 75px;
+    margin: 0 auto;
+    z-index: 10000;
+
+    .navbar-logo {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        img {
+            height: 50px;
+            width: 50px;
+            margin-right: 16px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+    h1 {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+    }
+}
+
+.navbar-menu {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-item {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-item.active {
+    color: var(--white);
+}
+
+
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    margin-right: 32px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #FFF;
+    margin: 2px 0;
+    transition: 0.4s;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .navbar-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 70px;
+        height: auto;
+        left: 0;
+        background: #0E1111;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-menu.active {
+        display: flex;
+        z-index: 100000000;
+    }
+
+    .navbar-item {
+        padding: 1rem;
+        border-top: 1px solid #eee;
+        width: calc(100% - 64px);
+        margin-left: 32px;
+        margin-right: 32px;
+    }
+
+    .navbar-button {
+        margin-left: 32px;
+        margin-right: 32px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .navbar-toggle {
+        display: flex;
+    }
+
+    .navbar-logo img {
+        margin-left: 32px;
+    }
+}
