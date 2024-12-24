@@ -2,7 +2,7 @@ specVersion: 0.0.4
 description: Calypso Holiday NFT Contest is a semi-permissinless protocol on the Calypso Hub
 repository: https://github.com/TheCalypsoHub/holiday-nft-contest-2024/indexer
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 features:
   - nonFatalErrors
   - grafting
@@ -11,7 +11,7 @@ dataSources:
     name: CalypsoHolidayNFT2024
     network: skale-calypso-testnet
     source:
-      address: '0xbd1df8e9ea32b047c7a21c55820223ae69d4a67c'
+      address: "0xbd1df8e9ea32b047c7a21c55820223ae69d4a67c"
       abi: CalypsoHolidayNFT2024
       startBlock: 2849875
     mapping:
@@ -23,8 +23,8 @@ dataSources:
         - Owner
       abis:
         - name: CalypsoHolidayNFT2024
-          file: ./abis/CalypsoHolidayNFT2024.json
+          file: CalypsoHolidayNFT2024/CalypsoHolidayNFT2024.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/mappings/nft.ts
+      file: CalypsoHolidayNFT2024/CalypsoHolidayNFT2024.wasm

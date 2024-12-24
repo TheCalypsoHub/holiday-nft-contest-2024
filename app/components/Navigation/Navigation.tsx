@@ -19,9 +19,9 @@ export default function Navigation() {
           <h1>Holiday NFT Contest</h1>
         </div>
         <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
-          {/*<a href="/" className={`navbar-item ${pathname === "/" ? "active" : ""}`}><Underline text="Home" /></a>*/}
-          {/*<a href="/mint" className={`navbar-item ${pathname === "/mint" ? "active" : ""}`}><Underline text="Mint" /></a>
-          <a href="/vote" className={`navbar-item ${pathname === "/vote" ? "active" : ""}`}><Underline text="Vote" /></a>*/}
+          <a href="/" className={`navbar-item ${pathname === "/" ? "active" : ""}`}><Underline text="Home" /></a>
+          <a href="/mint" className={`navbar-item ${pathname === "/mint" ? "active" : ""}`}><Underline text="Mint" /></a>
+          <a href="/vote" className={`navbar-item ${pathname === "/vote" ? "active" : ""}`}><Underline text="Vote" /></a>
         </div>
         <div className="navbar-toggle" onClick={toggleMenu}>
             {isOpen
