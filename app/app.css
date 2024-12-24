@@ -149,7 +149,7 @@ p {
 label {
     margin-bottom: 0.75rem;
     font-family: var(--font-primary) !important;
-    font-wieght: var(--font-weight-bold) !important;
+    font-weight: var(--font-weight-bold) !important;
     font-size: 1rem !important;
 }
 
