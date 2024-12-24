@@ -1,4 +1,6 @@
 import type { Route } from "./+types/home";
+import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
+import '@leenguyen/react-flip-clock-countdown/dist/index.css';
 import "~/styles/home.css";
 
 export function meta({}: Route.MetaArgs) {
@@ -44,6 +46,12 @@ export default function Home() {
             <small>
                 Note, all SKL rewards and future NFTs will be distributed on the SKALE Europa Hub or SKALE Calypso Hub.
             </small>
+            <br />
+            <h5>Minting Ends + Voting Begins in:</h5>
+            <FlipClockCountdown
+                to={new Date(1735848000 * 1000)}
+                className='flip-clock'
+            />
         </div>
     );
 }

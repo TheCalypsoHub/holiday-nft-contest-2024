@@ -67,6 +67,10 @@ export async function getTokenURI(tokenId: bigint) {
     const decoded = Buffer.from(tokenURI.split(",")[1], "base64").toString("utf-8");
     const obj = JSON.parse(decoded);
 
-    return obj;
+    return obj as {
+        image: string,
+        description: string,
+        name: string
+    };
 
 }
