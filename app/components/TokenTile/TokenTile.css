@@ -1,59 +1,59 @@
 .nftTile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  max-width: 600px;
-  transition: transform 0.3s ease;
-  min-height: 500px;
-  height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 600px;
+    transition: transform 0.3s ease;
+    min-height: 500px;
+    height: 500px;
 }
 
 .nftTile:hover {
-  transform: translateY(-10px);
+    transform: translateY(-10px);
 }
 
 .nftImage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-  height: 400px;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    height: 400px;
+    width: 100%;
 
-  img {
-    width: auto;
-    max-width: 50%;
-    height: auto;
-  }
+    img {
+        width: auto;
+        max-width: 50%;
+        height: auto;
+    }
 }
 
 .nftDetails {
-  padding: 16px;
-  text-align: left;
+    padding: 16px;
+    text-align: left;
 }
 
 .nftName {
-  font-size: 0.75rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
 }
 
 @media (max-width: 768px) {
-  .nftTile {
-    max-width: 85%;
-    margin: 32px auto;
-  }
+    .nftTile {
+        max-width: 85%;
+        margin: 32px auto;
+    }
 
-  .nftImage {
-    width: 50%;
-    margin: 0 auto;
-    padding: 16px 0;
-    border-radius: 12px;
-  }
+    .nftImage {
+        width: 50%;
+        margin: 0 auto;
+        padding: 16px 0;
+        border-radius: 12px;
+    }
 }

@@ -1,17 +1,17 @@
 .tokensGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 3fr));
-  gap: 16px;
-  width: 100%;
-  margin: 0 0%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 3fr));
+    gap: 16px;
+    width: 100%;
+    margin: 0 0%;
 }
 
 .tokensGridItem {
-  margin: 16px 0;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
+    margin: 16px 0;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
 }
 
 .tokensGridItem:hover {
-  transform: scale(1.025);
+    transform: scale(1.025);
 }
