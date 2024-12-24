@@ -1,0 +1,44 @@
+.page-header {
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+
+    h2 {
+        width: 50%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+
+        @media (max-width: 864px) {
+            width: 45%;
+            margin-left: 32px;
+        }
+
+        @media (max-width: 500px) {
+            font-size: 1.25rem;
+        }
+    }
+
+    .reusable-pagination {
+        height: 100%;
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        align-self: center;
+        align-content: center;
+
+        @media (max-width: 1024px) {
+            width: 45%;
+
+            ul {
+                padding: 0;
+                margin: 0;
+            }
+        }
+    }
+}
