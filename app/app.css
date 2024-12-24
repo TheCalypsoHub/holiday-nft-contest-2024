@@ -144,7 +144,17 @@ h6 {
 p {
     font-family: var(--font-primary);
     font-weight: var(--font-weight-normal);
-    margin: 0 0 1.5rem;
+}
+
+label {
+    margin-bottom: 0.75rem;
+    font-family: var(--font-primary) !important;
+    font-wieght: var(--font-weight-bold) !important;
+    font-size: 1rem !important;
+}
+
+input[type="text"] {
+    color: #000;
 }
 
 /* Lists */
@@ -154,10 +164,14 @@ ol {
     padding-left: 1.5rem;
 }
 
+ol {
+    list-style-type: decimal;
+}
+
 li {
     font-family: var(--font-primary);
     margin-bottom: 0.5rem;
-    color: #444;
+    color: var(--white);
 }
 
 /* Buttons */
@@ -204,6 +218,16 @@ blockquote {
 small {
     font-size: 0.875rem;
     color: #666;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
 }
 
 .pageContainer {

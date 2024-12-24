@@ -8,11 +8,21 @@ libs = [
     'lib',
     'node_modules'
 ]
+optimizer = true
+optimizer_runs = 200_000
 
 remappings = [
     '@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/'
 ]
 
+[rpc_endpoints]
+calypso = 'https://mainnet.skalenodes.com/v1/honorable-steel-rasalhague'
+calypso_testnet = 'https://testnet.skalenodes.com/v1/giant-half-dual-testnet'
+
 
 [fuzz]
 runs = 1000
+
+[etherscan]
+calypso = { key = 'na', url = 'https://honorable-steel-rasalhague.explorer.mainnet.skalenodes.com/api' }
+calypso_testnet = { key = 'na', url = 'https://giant-half-dual-testnet.explorer.testnet.skalenodes.com/api' }

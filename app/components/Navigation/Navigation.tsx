@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Underline } from '../Underline';
 import { useLocation } from 'react-router';
 import './styles.css';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,9 +21,7 @@ export default function Navigation() {
         <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
           <a href="/" className={`navbar-item ${pathname === "/" ? "active" : ""}`}><Underline text="Home" /></a>
           <a href="/mint" className={`navbar-item ${pathname === "/mint" ? "active" : ""}`}><Underline text="Mint" /></a>
-          <div className="navbar-item">
-            <ConnectButton showBalance={false} accountStatus="address" />
-          </div>
+          <a href="/vote" className={`navbar-item ${pathname === "/vote" ? "active" : ""}`}><Underline text="Vote" /></a>
         </div>
         <div className="navbar-toggle" onClick={toggleMenu}>
             {isOpen

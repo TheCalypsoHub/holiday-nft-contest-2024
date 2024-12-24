@@ -1,0 +1,49 @@
+.contentCard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 16px 0 0 0;
+}
+.left {
+    width: 40%;
+    border-right: 1px solid #FFF;
+    padding-right: 16px;
+}
+
+.right {
+    width: 55%;
+    img {
+        width: 50%;
+        height: auto;
+    }
+}
+
+.waiting-for-mint {
+    height: 100%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+}
+
+.mint-successful {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    img {
+        width: auto;
+        height: auto;
+
+        max-width: 50%;
+        max-height: 75%;
+    }
+}

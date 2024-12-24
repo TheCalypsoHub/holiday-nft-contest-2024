@@ -9,3 +9,5 @@
 .env.production
 .env/
 
+uploads
+uploads/

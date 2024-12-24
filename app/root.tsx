@@ -10,7 +10,6 @@ import {
 import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
 import Navigation from "./components/Navigation/Navigation";
-import Web3Providers from "./components/Web3Providers";
 import Snowflakes from "./components/Snowflakes/Snowflakes";
 
 export const links: Route.LinksFunction = () => [
@@ -51,13 +50,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
     return (
-        <Web3Providers>
+        <>
             <Navigation />
             <div className="pageContainer">
                 <Snowflakes />
                 <Outlet />
             </div>
-        </Web3Providers>
+        </>
     );
 }
 
