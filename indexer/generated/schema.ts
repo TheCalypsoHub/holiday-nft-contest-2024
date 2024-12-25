@@ -105,6 +105,19 @@ export class Token extends Entity {
       this.set("tokenURI", Value.fromString(<string>value));
     }
   }
+
+  get votes(): BigInt {
+    let value = this.get("votes");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set votes(value: BigInt) {
+    this.set("votes", Value.fromBigInt(value));
+  }
 }
 
 export class User extends Entity {

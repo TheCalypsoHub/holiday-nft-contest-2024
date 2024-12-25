@@ -11,6 +11,7 @@ import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
 import Navigation from "./components/Navigation/Navigation";
 import Snowflakes from "./components/Snowflakes/Snowflakes";
+import { Web3Provider } from "./providers/Web3Provider";
 
 export const links: Route.LinksFunction = () => [
     { rel: "icon", href: "/logo.svg" },
@@ -50,13 +51,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
     return (
-        <>
+        <Web3Provider>
             <Navigation />
             <div className="pageContainer">
-                <Snowflakes />
                 <Outlet />
+                <Snowflakes />
             </div>
-        </>
+        </Web3Provider>
     );
 }
 

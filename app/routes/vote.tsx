@@ -1,9 +1,4 @@
-import {
-    data,
-    useLoaderData,
-    useLocation,
-    useSearchParams,
-} from "react-router";
+import { data, useLoaderData, useLocation } from "react-router";
 import type { Route } from "./+types/vote";
 import { gql, request as graphQLRequest } from "graphql-request";
 import TokenGrid from "~/components/TokenGrid/TokenGrid";
@@ -11,12 +6,6 @@ import { getNextTokenId, getTokenURI } from "~/server/web3.server";
 import type { Token } from "~/components/TokenTile/TokenTile";
 import ReusablePagination from "~/components/ReusablePagination/ReusablePagination";
 import "~/styles/vote.css";
-
-const GRAPH_ENDPOINT = process.env.GRAPH_ENDPOINT;
-
-if (!GRAPH_ENDPOINT) {
-    throw new Error("Missing Graph Endpoint");
-}
 
 export function meta({}: Route.MetaArgs) {
     return [
@@ -29,6 +18,12 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function loader({ request }: Route.LoaderArgs) {
+    const GRAPH_ENDPOINT = process.env.GRAPH_ENDPOINT;
+
+    if (!GRAPH_ENDPOINT) {
+        throw new Error("Missing Graph Endpoint");
+    }
+
     const url = new URL(request.url);
     const searchParams = url.searchParams;
     const page = searchParams.get("page");
@@ -39,13 +34,14 @@ export async function loader({ request }: Route.LoaderArgs) {
                 owner {
                     id
                 }
+                votes
                 tokenId
             }
         }
     `;
 
     const graphResponse = (await graphQLRequest(GRAPH_ENDPOINT!, document)) as {
-        tokens: [{ tokenId: string; owner: { id: string } }];
+        tokens: [{ tokenId: string; owner: { id: string }; votes: string }];
     };
     let tokens: Token[] = [];
 
@@ -55,6 +51,7 @@ export async function loader({ request }: Route.LoaderArgs) {
             tokenId: token.tokenId,
             owner: token.owner.id,
             tokenURI: uri,
+            votes: token.votes,
         });
     }
 

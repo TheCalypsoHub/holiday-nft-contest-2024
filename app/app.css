@@ -143,6 +143,8 @@ h6 {
 p {
     font-family: var(--font-primary);
     font-weight: var(--font-weight-normal);
+    position: relative;
+    z-index: 10000000000000;
 }
 
 label {

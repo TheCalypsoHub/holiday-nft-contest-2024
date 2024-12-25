@@ -11,6 +11,7 @@
     transition: transform 0.3s ease;
     min-height: 500px;
     height: 500px;
+    position: relative;
 }
 
 .nftTile:hover {
@@ -55,5 +56,15 @@
         margin: 0 auto;
         padding: 16px 0;
         border-radius: 12px;
+    }
+}
+
+.vote-count {
+    position: absolute;
+    top: 2.5%;
+    left: 2.5%;
+
+    p {
+        color: #000;
     }
 }

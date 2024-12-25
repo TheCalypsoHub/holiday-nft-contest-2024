@@ -4,6 +4,7 @@ type Token @entity {
   owner: User!
   contractAddress: String!
   tokenURI: String
+  votes: BigInt!
 }
 
 type User @entity {
