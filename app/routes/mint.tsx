@@ -112,7 +112,14 @@ export default function Mint() {
                             }}
                         >
                             <div className="column">
-                                <Label htmlFor="upload">Upload File</Label>
+                                <Label htmlFor="upload">
+                                    Select Image to Upload
+                                </Label>
+                                <small>
+                                    Image will upload automatically during NFT
+                                    Mint
+                                </small>
+                                <br />
                                 <input
                                     type="file"
                                     id="upload"
