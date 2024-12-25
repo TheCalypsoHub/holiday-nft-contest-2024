@@ -30,7 +30,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
     const document = gql`
         {
-            tokens(skip: ${(parseInt(page) - 1) * 12}, orderBy:tokenId, first: 12, orderDirection: desc) {
+            tokens(skip: ${(parseInt(page) - 1) * 12}, orderBy:votes, first: 12, orderDirection: desc) {
                 owner {
                     id
                 }
