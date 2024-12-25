@@ -33,12 +33,13 @@ export default function Home() {
             <ol>
                 <li>Minting opens Dec 25 at 9 AM PST</li>
                 <li>
-                    Head over to the <a href="#">Mint</a> page and mint your NFT
+                    Head over to the <a href="/mint">Mint</a> page and mint your
+                    NFT
                 </li>
                 <li>Minting closes and voting opens Jan 2 at 12 PM PST</li>
                 <li>
-                    Head over to the <a href="#">Vote</a> page to vote on your
-                    favorite
+                    Head over to the <a href="/vote">Vote</a> page to vote on
+                    your favorite
                 </li>
                 <li>Voting closes January 6 at 12 PM PST</li>
                 <li>
@@ -68,12 +69,6 @@ export default function Home() {
                 Note, all SKL rewards and future NFTs will be distributed on the
                 SKALE Europa Hub or SKALE Calypso Hub.
             </small>
-            <br />
-            <h5>Minting Ends + Voting Begins in:</h5>
-            {/*<FlipClockCountdown
-                to={new Date(1735848000 * 1000)}
-                className="flip-clock"
-            />*/}
         </div>
     );
 }
