@@ -14,6 +14,7 @@ contract CalypsoHolidayNFT2024 is ERC721, ERC721Enumerable, ERC721URIStorage, ER
     
     using Strings for uint256;
 
+    bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
 
@@ -29,6 +30,7 @@ contract CalypsoHolidayNFT2024 is ERC721, ERC721Enumerable, ERC721URIStorage, ER
         _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
         _grantRole(MINTER_ROLE, _msgSender());
         _grantRole(PAUSER_ROLE, _msgSender());
+        _grantRole(MANAGER_ROLE, _msgSender());
     }
 
     function pause() public onlyRole(PAUSER_ROLE) {
@@ -37,6 +39,10 @@ contract CalypsoHolidayNFT2024 is ERC721, ERC721Enumerable, ERC721URIStorage, ER
 
     function unpause() public onlyRole(PAUSER_ROLE) {
         _unpause();
+    }
+
+    function setURI(uint256 tokenId, string memory newTokenURI) external onlyRole(MANAGER_ROLE) {
+        _setTokenURI(tokenId, newTokenURI);
     }
 
     function safeMint(address to, string memory uri) onlyRole(MINTER_ROLE) whenNotPaused public {
