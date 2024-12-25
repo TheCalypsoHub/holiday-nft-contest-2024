@@ -26,12 +26,6 @@ export default function TokenTile({ token }: { token: Token }) {
 
     return (
         <div className="nftTile">
-            <div className="vote-count">
-                <p>
-                    <strong>Token #:</strong> {token.tokenId}
-                </p>
-                <p># of Votes: {token.votes}</p>
-            </div>
             {!hasVoted && (
                 <Vote
                     key={"vote" + token.tokenId.toString()}
@@ -45,8 +39,16 @@ export default function TokenTile({ token }: { token: Token }) {
                 />
             </div>
             <div className="nftDetails">
-                <h2 className="nftName">{token.owner}</h2>
-                <small>Current Owner</small>
+                <p>
+                    <strong># of Votes:</strong> {token.votes}
+                </p>
+                <p>
+                    <strong>Token #:</strong> {token.tokenId}
+                </p>
+                <p>
+                    <strong>Current Owner:</strong>{" "}
+                    {token.owner.substring(0, 10)}...{token.owner.substring(30)}
+                </p>
             </div>
         </div>
     );

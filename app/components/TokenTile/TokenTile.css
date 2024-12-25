@@ -31,12 +31,20 @@
         width: auto;
         max-width: 50%;
         height: auto;
+
+        @media (max-width: 864px) {
+            max-width: 85%;
+        }
     }
 }
 
 .nftDetails {
     padding: 16px;
     text-align: left;
+
+    p {
+        color: #000;
+    }
 }
 
 .nftName {
@@ -67,5 +75,13 @@
 
     p {
         color: #000;
+    }
+}
+
+@media (max-width: 864px) {
+    .vote-count {
+        top: 2.5%;
+        left: 2.5%;
+        right: 2.5%;
     }
 }
