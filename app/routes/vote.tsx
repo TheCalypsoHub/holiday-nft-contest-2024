@@ -28,34 +28,40 @@ export async function loader({ request }: Route.LoaderArgs) {
     const searchParams = url.searchParams;
     let page = searchParams.get("page") ?? "1";
 
-    const document = gql`
-        {
-            tokens(skip: ${(parseInt(page) - 1) * 12}, orderBy:votes, first: 12, orderDirection: desc) {
-                owner {
-                    id
-                }
-                votes
-                tokenId
-            }
-        }
-    `;
-
-    const graphResponse = (await graphQLRequest(GRAPH_ENDPOINT!, document)) as {
-        tokens: [{ tokenId: string; owner: { id: string }; votes: string }];
-    };
+    const nextTokenId = await getNextTokenId();
     let tokens: Token[] = [];
 
-    for (const token of graphResponse.tokens) {
-        const uri = await getTokenURI(BigInt(token.tokenId));
-        tokens.push({
-            tokenId: token.tokenId,
-            owner: token.owner.id,
-            tokenURI: uri,
-            votes: token.votes,
-        });
+    if (nextTokenId > 1) {
+        const document = gql`
+            {
+                tokens(skip: ${(parseInt(page) - 1) * 12}, orderBy:votes, first: 12, orderDirection: desc) {
+                    owner {
+                        id
+                    }
+                    votes
+                    tokenId
+                }
+            }
+        `;
+
+        const graphResponse = (await graphQLRequest(
+            GRAPH_ENDPOINT!,
+            document
+        )) as {
+            tokens: [{ tokenId: string; owner: { id: string }; votes: string }];
+        };
+
+        for (const token of graphResponse.tokens) {
+            const uri = await getTokenURI(BigInt(token.tokenId));
+            tokens.push({
+                tokenId: token.tokenId,
+                owner: token.owner.id,
+                tokenURI: uri,
+                votes: token.votes,
+            });
+        }
     }
 
-    const nextTokenId = await getNextTokenId();
     page = page ?? "1";
     let totalPages = 1;
 
@@ -79,9 +85,22 @@ export default function Vote() {
     const location = useLocation();
 
     return (
-        <>
+        <div className="vote-page">
             <div className="row page-header">
                 <h2>Explore &amp; Vote</h2>
+                {tokens.length > 0 && (
+                    <ReusablePagination
+                        currentPage={currentPage}
+                        nextPage={nextPage}
+                        pathname={location.pathname}
+                        previousPage={previousPage}
+                        totalPages={totalPages}
+                    />
+                )}
+            </div>
+            {tokens.length === 0 && <h3>No NFTs Minted Yet</h3>}
+            {tokens.length > 0 && <TokenGrid tokens={tokens} />}
+            {tokens.length > 0 && (
                 <ReusablePagination
                     currentPage={currentPage}
                     nextPage={nextPage}
@@ -89,15 +108,7 @@ export default function Vote() {
                     previousPage={previousPage}
                     totalPages={totalPages}
                 />
-            </div>
-            <TokenGrid tokens={tokens} />
-            <ReusablePagination
-                currentPage={currentPage}
-                nextPage={nextPage}
-                pathname={location.pathname}
-                previousPage={previousPage}
-                totalPages={totalPages}
-            />
-        </>
+            )}
+        </div>
     );
 }
