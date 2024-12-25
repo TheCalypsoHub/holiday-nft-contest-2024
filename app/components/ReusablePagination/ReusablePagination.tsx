@@ -77,7 +77,7 @@ export default function ReusablePagination({
                     </PaginationItem>
                 )}
                 <PaginationItem>
-                    {currentPage <= totalPages && (
+                    {currentPage < totalPages && (
                         <PaginationNext
                             rel="prefetch"
                             href={`${pathname}?page=${nextPage}`}

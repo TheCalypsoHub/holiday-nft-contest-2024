@@ -26,7 +26,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
     const url = new URL(request.url);
     const searchParams = url.searchParams;
-    const page = searchParams.get("page");
+    let page = searchParams.get("page");
 
     const document = gql`
         {
@@ -56,16 +56,20 @@ export async function loader({ request }: Route.LoaderArgs) {
     }
 
     const nextTokenId = await getNextTokenId();
+    page = page ?? "1";
     let totalPages = 1;
+
     if (nextTokenId > 10) {
-        totalPages = Number(nextTokenId / BigInt(10));
+        totalPages = Number(nextTokenId / BigInt(10)) + 1;
     }
+    console.log("Total Pages: ", totalPages);
+
     return data({
         tokens,
         totalPages,
-        previousPage: (Number(page) ?? 1) - 1,
-        currentPage: Number(page) ?? 1,
-        nextPage: (Number(page) ?? 1) + 1,
+        previousPage: parseInt(page) - 1,
+        currentPage: parseInt(page),
+        nextPage: parseInt(page) + 1,
     });
 }
 
