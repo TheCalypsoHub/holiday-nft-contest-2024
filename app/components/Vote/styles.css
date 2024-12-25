@@ -2,4 +2,6 @@
     position: absolute;
     top: 2.5%;
     right: 2.5%;
+    background: var(--primary);
+    border-radius: var(--radius);
 }
