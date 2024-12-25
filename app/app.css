@@ -242,4 +242,8 @@ small {
     margin-top: 50px;
     position: relative;
     z-index: 1;
+
+    @media (max-width: 768px) {
+        max-width: 90%;
+    }
 }
