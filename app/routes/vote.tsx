@@ -26,11 +26,11 @@ export async function loader({ request }: Route.LoaderArgs) {
 
     const url = new URL(request.url);
     const searchParams = url.searchParams;
-    let page = searchParams.get("page");
+    let page = searchParams.get("page") ?? "1";
 
     const document = gql`
         {
-            tokens(skip: ${(page ? parseInt(page) - 1 : 1) * 12}, orderBy:tokenId, first: 12, orderDirection: desc) {
+            tokens(skip: ${(parseInt(page) - 1) * 12}, orderBy:tokenId, first: 12, orderDirection: desc) {
                 owner {
                     id
                 }
