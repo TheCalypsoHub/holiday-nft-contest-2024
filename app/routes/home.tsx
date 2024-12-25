@@ -1,6 +1,5 @@
 import type { Route } from "./+types/home";
-import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
-import "@leenguyen/react-flip-clock-countdown/dist/index.css";
+import { Suspense } from "react";
 import "~/styles/home.css";
 
 export function meta({}: Route.MetaArgs) {
@@ -71,10 +70,10 @@ export default function Home() {
             </small>
             <br />
             <h5>Minting Ends + Voting Begins in:</h5>
-            <FlipClockCountdown
+            {/*<FlipClockCountdown
                 to={new Date(1735848000 * 1000)}
                 className="flip-clock"
-            />
+            />*/}
         </div>
     );
 }

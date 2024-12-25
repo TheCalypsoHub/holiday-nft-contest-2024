@@ -1,6 +1,9 @@
-import { log, BigInt } from '@graphprotocol/graph-ts';
-import { CalypsoHolidayNFT2024, Transfer } from '../../generated/CalypsoHolidayNFT2024/CalypsoHolidayNFT2024';
-import { Token, User } from '../../generated/schema';
+import { log, BigInt } from "@graphprotocol/graph-ts";
+import {
+  CalypsoHolidayNFT2024,
+  Transfer,
+} from "../../generated/CalypsoHolidayNFT2024/CalypsoHolidayNFT2024";
+import { Token, User } from "../../generated/schema";
 
 // Event handler for the Transfer event
 export function handleTransfer(event: Transfer): void {
@@ -12,6 +15,7 @@ export function handleTransfer(event: Transfer): void {
     token = new Token(tokenId);
     token.tokenId = event.params.tokenId;
     token.contractAddress = event.address.toHexString();
+    token.votes = BigInt.fromU32(0);
 
     // Fetch the tokenURI using the contract call
     let contract = CalypsoHolidayNFT2024.bind(event.address);
@@ -40,7 +44,10 @@ export function handleTransfer(event: Transfer): void {
     fromUser = new User(event.params.from.toHexString());
     fromUser.balance = 0;
   }
-  if (event.params.from.toHexString() != "0x0000000000000000000000000000000000000000") {
+  if (
+    event.params.from.toHexString() !=
+    "0x0000000000000000000000000000000000000000"
+  ) {
     fromUser.balance -= 1;
   }
   fromUser.save();

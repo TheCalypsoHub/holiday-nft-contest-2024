@@ -11,7 +11,7 @@ dataSources:
     name: CalypsoHolidayNFT2024
     network: skale-calypso-testnet
     source:
-      address: '0xbd1df8e9ea32b047c7a21c55820223ae69d4a67c'
+      address: "0xbd1df8e9ea32b047c7a21c55820223ae69d4a67c"
       abi: CalypsoHolidayNFT2024
       startBlock: 2849875
     mapping:
@@ -28,3 +28,24 @@ dataSources:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
       file: ./src/mappings/nft.ts
+  - kind: ethereum/contract
+    name: CalypsoHolidayVoting2024
+    network: skale-calypso-testnet
+    source:
+      address: "0x654aacdB63a8066527ed6E39C9A2C3F6A037FAD2"
+      abi: CalypsoHolidayVoting2024
+      startBlock: 2849875
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Token
+        - Owner
+      abis:
+        - name: CalypsoHolidayVoting2024
+          file: ./abis/CalypsoHolidayVoting2024.json
+      eventHandlers:
+        - event: VoteCast(indexed address,indexed uint256)
+          handler: handleVote
+      file: ./src/mappings/votes.ts
