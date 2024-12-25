@@ -14,6 +14,7 @@ import { Label } from "~/components/ui/label";
 import "~/styles/mint.css";
 import { uploadObject } from "~/server/r2.server";
 import getDomainUrl from "~/lib/getDomainUrl";
+import sharp from "sharp";
 
 export function meta({}: Route.MetaArgs) {
     return [
@@ -41,7 +42,7 @@ export async function action({ request }: Route.ActionArgs) {
         });
     }
 
-    const [upload] = files as [File];
+    let [upload] = files as [File];
 
     if (!upload) {
         throw data("File Not FOund", {
@@ -50,8 +51,27 @@ export async function action({ request }: Route.ActionArgs) {
     }
 
     const nextTokenId = await getNextTokenId();
+    const fileType = `${upload.name.split(".")[1]}`;
+    let fileName = `${nextTokenId}.${fileType}`;
 
-    const fileName = `${nextTokenId}.${upload.name.split(".")[1]}`;
+    if (fileType !== "svg") {
+        const webp = await sharp(await upload.arrayBuffer())
+            .webp()
+            .toBuffer();
+        const uint8Array = new Uint8Array(webp.buffer);
+
+        // Construct BlobPart[]
+        const blobParts = [uint8Array]; // Or simply [buffer] since both are valid
+
+        // Create a Blob from BlobPart[]
+        const blob = new Blob(blobParts);
+
+        fileName = `${nextTokenId}.webp`;
+        upload = new File([blob], fileName, {
+            type: "image/webp",
+        });
+    }
+
     await uploadObject(upload, fileName);
     const { txHash, tokenId } = await mintNFT(
         walletAddress,

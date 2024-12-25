@@ -60,7 +60,8 @@ export async function loader({ request }: Route.LoaderArgs) {
     let totalPages = 1;
 
     if (nextTokenId > 10) {
-        totalPages = Number(nextTokenId / BigInt(10)) + 1;
+        totalPages = Number(nextTokenId / BigInt(10));
+        if (Number(nextTokenId) % 10 > 0) totalPages += 1;
     }
 
     return data({
