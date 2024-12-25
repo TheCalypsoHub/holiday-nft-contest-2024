@@ -77,7 +77,7 @@ export default function Vote({ tokenId }: { tokenId: bigint }) {
             });
         }
 
-        const res = await sendTransactionAsync({
+        await sendTransactionAsync({
             to: VotingContract.address as `0x${string}`,
             data: encodeFunctionData({
                 abi: VotingContract.abi,
@@ -85,17 +85,20 @@ export default function Vote({ tokenId }: { tokenId: bigint }) {
                 args: [tokenId],
             }),
         });
-        console.log("Res: ", res);
-    };
 
-    useEffect(() => {
-        if (isSuccess) {
-            setTimeout(() => {
-                revalidator.revalidate();
-                setIsPending(false);
-            }, 3000);
-        }
-    }, [isSuccess]);
+        setTimeout(() => {
+            revalidator.revalidate();
+        }, 5000);
+
+        setTimeout(() => {
+            setIsPending(false);
+            revalidator.revalidate();
+        }, 10000);
+
+        setTimeout(() => {
+            revalidator.revalidate();
+        }, 15000);
+    };
 
     return (
         <div className="vote-button">
