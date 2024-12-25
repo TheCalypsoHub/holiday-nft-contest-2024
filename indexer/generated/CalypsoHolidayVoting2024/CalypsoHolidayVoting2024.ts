@@ -10,6 +10,28 @@ import {
   BigInt,
 } from "@graphprotocol/graph-ts";
 
+export class OwnershipTransferred extends ethereum.Event {
+  get params(): OwnershipTransferred__Params {
+    return new OwnershipTransferred__Params(this);
+  }
+}
+
+export class OwnershipTransferred__Params {
+  _event: OwnershipTransferred;
+
+  constructor(event: OwnershipTransferred) {
+    this._event = event;
+  }
+
+  get previousOwner(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get newOwner(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+}
+
 export class VoteCast extends ethereum.Event {
   get params(): VoteCast__Params {
     return new VoteCast__Params(this);
@@ -127,6 +149,21 @@ export class CalypsoHolidayVoting2024 extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
+  owner(): Address {
+    let result = super.call("owner", "owner():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_owner(): ethereum.CallResult<Address> {
+    let result = super.tryCall("owner", "owner():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
   topTokens(param0: BigInt): BigInt {
     let result = super.call("topTokens", "topTokens(uint256):(uint256)", [
       ethereum.Value.fromUnsignedBigInt(param0),
@@ -179,6 +216,21 @@ export class CalypsoHolidayVoting2024 extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
+
+  votingLocked(): boolean {
+    let result = super.call("votingLocked", "votingLocked():(bool)", []);
+
+    return result[0].toBoolean();
+  }
+
+  try_votingLocked(): ethereum.CallResult<boolean> {
+    let result = super.tryCall("votingLocked", "votingLocked():(bool)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
 }
 
 export class ConstructorCall extends ethereum.Call {
@@ -207,6 +259,88 @@ export class ConstructorCall__Outputs {
   _call: ConstructorCall;
 
   constructor(call: ConstructorCall) {
+    this._call = call;
+  }
+}
+
+export class LockVotingCall extends ethereum.Call {
+  get inputs(): LockVotingCall__Inputs {
+    return new LockVotingCall__Inputs(this);
+  }
+
+  get outputs(): LockVotingCall__Outputs {
+    return new LockVotingCall__Outputs(this);
+  }
+}
+
+export class LockVotingCall__Inputs {
+  _call: LockVotingCall;
+
+  constructor(call: LockVotingCall) {
+    this._call = call;
+  }
+}
+
+export class LockVotingCall__Outputs {
+  _call: LockVotingCall;
+
+  constructor(call: LockVotingCall) {
+    this._call = call;
+  }
+}
+
+export class RenounceOwnershipCall extends ethereum.Call {
+  get inputs(): RenounceOwnershipCall__Inputs {
+    return new RenounceOwnershipCall__Inputs(this);
+  }
+
+  get outputs(): RenounceOwnershipCall__Outputs {
+    return new RenounceOwnershipCall__Outputs(this);
+  }
+}
+
+export class RenounceOwnershipCall__Inputs {
+  _call: RenounceOwnershipCall;
+
+  constructor(call: RenounceOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class RenounceOwnershipCall__Outputs {
+  _call: RenounceOwnershipCall;
+
+  constructor(call: RenounceOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class TransferOwnershipCall extends ethereum.Call {
+  get inputs(): TransferOwnershipCall__Inputs {
+    return new TransferOwnershipCall__Inputs(this);
+  }
+
+  get outputs(): TransferOwnershipCall__Outputs {
+    return new TransferOwnershipCall__Outputs(this);
+  }
+}
+
+export class TransferOwnershipCall__Inputs {
+  _call: TransferOwnershipCall;
+
+  constructor(call: TransferOwnershipCall) {
+    this._call = call;
+  }
+
+  get newOwner(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class TransferOwnershipCall__Outputs {
+  _call: TransferOwnershipCall;
+
+  constructor(call: TransferOwnershipCall) {
     this._call = call;
   }
 }

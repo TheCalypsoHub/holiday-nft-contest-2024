@@ -40,6 +40,13 @@ export default {
         },
         {
             type: "function",
+            name: "lockVoting",
+            inputs: [],
+            outputs: [],
+            stateMutability: "nonpayable",
+        },
+        {
+            type: "function",
             name: "nftContract",
             inputs: [],
             outputs: [
@@ -50,6 +57,20 @@ export default {
                 },
             ],
             stateMutability: "view",
+        },
+        {
+            type: "function",
+            name: "owner",
+            inputs: [],
+            outputs: [{ name: "", type: "address", internalType: "address" }],
+            stateMutability: "view",
+        },
+        {
+            type: "function",
+            name: "renounceOwnership",
+            inputs: [],
+            outputs: [],
+            stateMutability: "nonpayable",
         },
         {
             type: "function",
@@ -64,6 +85,19 @@ export default {
             inputs: [],
             outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
             stateMutability: "view",
+        },
+        {
+            type: "function",
+            name: "transferOwnership",
+            inputs: [
+                {
+                    name: "newOwner",
+                    type: "address",
+                    internalType: "address",
+                },
+            ],
+            outputs: [],
+            stateMutability: "nonpayable",
         },
         {
             type: "function",
@@ -86,6 +120,32 @@ export default {
             stateMutability: "view",
         },
         {
+            type: "function",
+            name: "votingLocked",
+            inputs: [],
+            outputs: [{ name: "", type: "bool", internalType: "bool" }],
+            stateMutability: "view",
+        },
+        {
+            type: "event",
+            name: "OwnershipTransferred",
+            inputs: [
+                {
+                    name: "previousOwner",
+                    type: "address",
+                    indexed: true,
+                    internalType: "address",
+                },
+                {
+                    name: "newOwner",
+                    type: "address",
+                    indexed: true,
+                    internalType: "address",
+                },
+            ],
+            anonymous: false,
+        },
+        {
             type: "event",
             name: "VoteCast",
             inputs: [
@@ -106,9 +166,31 @@ export default {
         },
         {
             type: "error",
+            name: "OwnableInvalidOwner",
+            inputs: [
+                {
+                    name: "owner",
+                    type: "address",
+                    internalType: "address",
+                },
+            ],
+        },
+        {
+            type: "error",
+            name: "OwnableUnauthorizedAccount",
+            inputs: [
+                {
+                    name: "account",
+                    type: "address",
+                    internalType: "address",
+                },
+            ],
+        },
+        {
+            type: "error",
             name: "ReentrancyGuardReentrantCall",
             inputs: [],
         },
     ],
-    address: isMainnet ? "" : "0x654aacdb63a8066527ed6e39c9a2c3f6a037fad2",
+    address: isMainnet ? "" : "0xf53D3D9c510D76F55D9695F9b823565dC3FA9D07",
 };

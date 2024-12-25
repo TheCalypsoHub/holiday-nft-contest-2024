@@ -19,6 +19,13 @@ export default {
         },
         {
             type: "function",
+            name: "MANAGER_ROLE",
+            inputs: [],
+            outputs: [{ name: "", type: "bytes32", internalType: "bytes32" }],
+            stateMutability: "view",
+        },
+        {
+            type: "function",
             name: "MINTER_ROLE",
             inputs: [],
             outputs: [{ name: "", type: "bytes32", internalType: "bytes32" }],
@@ -270,6 +277,24 @@ export default {
                     internalType: "address",
                 },
                 { name: "approved", type: "bool", internalType: "bool" },
+            ],
+            outputs: [],
+            stateMutability: "nonpayable",
+        },
+        {
+            type: "function",
+            name: "setURI",
+            inputs: [
+                {
+                    name: "tokenId",
+                    type: "uint256",
+                    internalType: "uint256",
+                },
+                {
+                    name: "newTokenURI",
+                    type: "string",
+                    internalType: "string",
+                },
             ],
             outputs: [],
             stateMutability: "nonpayable",
@@ -742,5 +767,5 @@ export default {
         { type: "error", name: "EnforcedPause", inputs: [] },
         { type: "error", name: "ExpectedPause", inputs: [] },
     ],
-    address: isMainnet ? "" : "0xbd1df8e9ea32b047c7a21c55820223ae69d4a67c",
+    address: isMainnet ? "" : "0xb5379445AFaF2C564Cabfe9303dc3c768E3B47fE",
 };
