@@ -100,7 +100,7 @@ contract CalypsoHolidayNFT2024 is ERC721, ERC721Enumerable, ERC721URIStorage, ER
             abi.encodePacked(
                 '{"name":"Token #',
                 Strings.toString(tokenId),
-                '", "description":"This is a dynamic NFT", "image":"',
+                '", "description":"Calypso Holiday Contest -- Circa 2024", "image":"',
                 imageURI,
                 '"}'
             )
