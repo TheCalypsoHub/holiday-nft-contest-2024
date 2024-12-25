@@ -7,10 +7,7 @@ import {
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { skaleCalypso, skaleCalypsoTestnet } from "viem/chains";
-import testnetDeployment from "../../smart-contracts/broadcast/Deploy.s.sol/974399131/run-latest.json";
-import mainnetDeployment from "../../smart-contracts/broadcast/Deploy.s.sol/974399131/run-latest.json"; // Switch to Mainnet
-
-import { abi } from "../../smart-contracts/out/CalypsoHolidayNFT2024.sol/CalypsoHolidayNFT2024.json";
+import NFTContract from "~/contracts/nft";
 
 const network = process.env.NETWORK;
 const privateKey = process.env.PRIVATE_KEY;
@@ -37,10 +34,8 @@ const walletClient = createWalletClient({
 });
 
 const contract = getContract({
-    abi,
-    address: isMainnet
-        ? "0x..."
-        : (testnetDeployment.transactions[0].contractAddress as `0x${string}`),
+    abi: NFTContract.abi,
+    address: NFTContract.address as `0x${string}`,
     client: { public: publicClient, wallet: walletClient },
 });
 
@@ -55,7 +50,7 @@ export async function mintNFT(userAddress: string, uri: string) {
     });
 
     const [transferLog] = parseEventLogs({
-        abi,
+        abi: NFTContract.abi,
         logs: receipt.logs,
     });
 

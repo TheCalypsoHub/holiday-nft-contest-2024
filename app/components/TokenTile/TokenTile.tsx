@@ -1,11 +1,7 @@
 import { useAccount, useReadContract } from "wagmi";
 import Vote from "../Vote/Vote";
 import "./TokenTile.css";
-import { abi } from "../../../smart-contracts/out/CalypsoHolidayVoting2024.sol/CalypsoHolidayVoting2024.json";
-import testnetDeployments from "../../../smart-contracts/broadcast/Deploy.s.sol/974399131/run-latest.json";
-import mainnetDeployments from "../../../smart-contracts/broadcast/Deploy.s.sol/974399131/run-latest.json"; // Update
-
-const isMainnet = process.env.NETWORK === "mainnet";
+import VotingContract from "~/contracts/voting";
 
 export type Token = {
     tokenURI: {
@@ -22,11 +18,8 @@ export default function TokenTile({ token }: { token: Token }) {
     const { address } = useAccount();
 
     const { data: hasVoted } = useReadContract({
-        abi: abi,
-        address: (isMainnet
-            ? mainnetDeployments.transactions[1].contractAddress
-            : testnetDeployments.transactions[1]
-                  .contractAddress) as `0x${string}`,
+        abi: VotingContract.abi,
+        address: VotingContract.address as `0x${string}`,
         functionName: "hasVoted",
         args: [address],
     });
