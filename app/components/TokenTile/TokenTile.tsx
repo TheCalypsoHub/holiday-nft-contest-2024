@@ -27,6 +27,9 @@ export default function TokenTile({ token }: { token: Token }) {
     return (
         <div className="nftTile">
             <div className="vote-count">
+                <p>
+                    <strong>Token #:</strong> {token.tokenId}
+                </p>
                 <p># of Votes: {token.votes}</p>
             </div>
             {!hasVoted && (

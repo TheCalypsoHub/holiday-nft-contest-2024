@@ -1,6 +1,6 @@
 .tokensGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 3fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 3fr));
     gap: 16px;
     width: 100%;
     margin: 0 0%;

@@ -30,7 +30,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
     const document = gql`
         {
-            tokens(skip: ${(page ? parseInt(page) - 1 : 1) * 10}, orderBy:tokenId, first: 10) {
+            tokens(skip: ${(page ? parseInt(page) - 1 : 1) * 12}, orderBy:tokenId, first: 12, orderDirection: desc) {
                 owner {
                     id
                 }
@@ -59,9 +59,9 @@ export async function loader({ request }: Route.LoaderArgs) {
     page = page ?? "1";
     let totalPages = 1;
 
-    if (nextTokenId > 10) {
-        totalPages = Number(nextTokenId / BigInt(10));
-        if (Number(nextTokenId) % 10 > 0) totalPages += 1;
+    if (nextTokenId > 12) {
+        totalPages = Number(nextTokenId / BigInt(12));
+        if (Number(nextTokenId) % 12 > 0) totalPages += 1;
     }
 
     return data({
