@@ -18,8 +18,7 @@ contract Simulation is Test {
 
         calypsoHolidayNFT2024 = new CalypsoHolidayNFT2024(
             "Calypso Holiday NFT 2024",
-            "HOLIDAY",
-            address(this)
+            "HOLIDAY"
         );
 
         calypsoHolidayVoting2024 = new CalypsoHolidayVoting2024(
@@ -28,31 +27,18 @@ contract Simulation is Test {
     }
 
     function test_SingleUserMint() public {
-        calypsoHolidayNFT2024.prepareMint(address(0x1), "ipfs://");
-
         uint256 nextTokenId = calypsoHolidayNFT2024.nextTokenId();
-        console.log("Next Token Id: ", nextTokenId);
 
-        vm.prank(address(0x1));
-        calypsoHolidayNFT2024.safeMint();
+        calypsoHolidayNFT2024.safeMint(address(0x1), "ipfs://");
 
         assertEq(calypsoHolidayNFT2024.ownerOf(nextTokenId), address(0x1));
         assertEq(calypsoHolidayNFT2024.nextTokenId(), 2);
     }
 
     function test_MultiUserMint() public {
-        calypsoHolidayNFT2024.prepareMint(address(0x1), "ipfs://");
-        calypsoHolidayNFT2024.prepareMint(address(0x2), "ipfs://");
-        calypsoHolidayNFT2024.prepareMint(address(0x3), "ipfs://");
-
-        vm.prank(address(0x1));
-        calypsoHolidayNFT2024.safeMint();
-
-        vm.prank(address(0x2));
-        calypsoHolidayNFT2024.safeMint();
-
-        vm.prank(address(0x3));
-        calypsoHolidayNFT2024.safeMint();
+        calypsoHolidayNFT2024.safeMint(address(0x1), "ipfs://");
+        calypsoHolidayNFT2024.safeMint(address(0x2), "ipfs://");
+        calypsoHolidayNFT2024.safeMint(address(0x3), "ipfs://");
 
         assertEq(calypsoHolidayNFT2024.ownerOf(1), address(0x1));
         assertEq(calypsoHolidayNFT2024.ownerOf(2), address(0x2));
@@ -61,18 +47,9 @@ contract Simulation is Test {
     }
 
     function test_Vote() public {
-        calypsoHolidayNFT2024.prepareMint(address(0x1), "ipfs://");
-        calypsoHolidayNFT2024.prepareMint(address(0x2), "ipfs://");
-        calypsoHolidayNFT2024.prepareMint(address(0x3), "ipfs://");
-
-        vm.prank(address(0x1));
-        calypsoHolidayNFT2024.safeMint();
-
-        vm.prank(address(0x2));
-        calypsoHolidayNFT2024.safeMint();
-
-        vm.prank(address(0x3));
-        calypsoHolidayNFT2024.safeMint();
+        calypsoHolidayNFT2024.safeMint(address(0x1), "ipfs://");
+        calypsoHolidayNFT2024.safeMint(address(0x2), "ipfs://");
+        calypsoHolidayNFT2024.safeMint(address(0x3), "ipfs://");
 
         assertEq(calypsoHolidayNFT2024.ownerOf(1), address(0x1));
         assertEq(calypsoHolidayNFT2024.ownerOf(2), address(0x2));

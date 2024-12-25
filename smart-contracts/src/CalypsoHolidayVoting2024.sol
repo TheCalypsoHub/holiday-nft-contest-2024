@@ -3,13 +3,17 @@ pragma solidity 0.8.24;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract CalypsoHolidayVoting2024 is ReentrancyGuard {
+contract CalypsoHolidayVoting2024 is Ownable, ReentrancyGuard {
     
     IERC721 public nftContract;
     
     // Track Total Votes
     uint256 public totalVotes;
+
+    // Lock Voting
+    bool public votingLocked;
 
     // Mapping to track votes for each token ID
     mapping(uint256 => uint256) public votes;
@@ -23,21 +27,39 @@ contract CalypsoHolidayVoting2024 is ReentrancyGuard {
     // Event emitted when a vote is cast
     event VoteCast(address indexed voter, uint256 indexed tokenId);
     
-    constructor(address _nftContract) {
+    constructor(address _nftContract) Ownable(_msgSender()) {
         require(_nftContract != address(0), "Invalid NFT contract address");
         nftContract = IERC721(_nftContract);
     }
     
+    function lockVoting() external onlyOwner {
+        if (votingLocked) {
+            revert("Voting Cannot be Unlocked");
+        }
+
+        votingLocked = true;
+    }
+
     /**
      * @dev Cast a vote for a specific token ID
      * @param tokenId The ID of the token to vote for
      */
     function vote(uint256 tokenId) external nonReentrant {
+
+        // Check Voting Locked
+        if (votingLocked) {
+            revert("Voting is Locked");
+        }
+
         // Ensure token exists by checking owner
-        require(nftContract.ownerOf(tokenId) != address(0), "Token does not exist");
+        if (nftContract.ownerOf(tokenId) == address(0)) {
+            revert("Token Does Not Exist");
+        }
         
         // Check if wallet has already voted
-        require(!hasVoted[msg.sender], "Address has already voted");
+        if (hasVoted[msg.sender]) {
+            revert("Address has already voted");
+        }
         
         // Mark address as having voted
         hasVoted[msg.sender] = true;
