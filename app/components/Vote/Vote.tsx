@@ -1,4 +1,4 @@
-import { useAccount } from "wagmi";
+import { useAccount, useWaitForTransactionReceipt } from "wagmi";
 import "./styles.css";
 import { Button } from "../ui/button";
 import { useAppKit } from "@reown/appkit/react";
@@ -14,12 +14,16 @@ import {
 import { skaleCalypso, skaleCalypsoTestnet } from "viem/chains";
 import mineGasForTransaction from "./miner";
 import VotingContract from "~/contracts/voting";
+import { useEffect, useState } from "react";
+import { useRevalidator } from "react-router";
 
 const isMainnet = process.env.NETWORK === "mainnet";
 
 export default function Vote({ tokenId }: { tokenId: bigint }) {
     const { isConnected, address } = useAccount();
-    const { sendTransactionAsync } = useSendTransaction();
+    const { sendTransactionAsync, isSuccess, status } = useSendTransaction();
+    const [isPending, setIsPending] = useState<boolean>(false);
+    const revalidator = useRevalidator();
     const modal = useAppKit();
 
     const open = () => {
@@ -31,6 +35,7 @@ export default function Vote({ tokenId }: { tokenId: bigint }) {
             "Warning, you will only be able to vote once. Are you sure?"
         );
         if (!yes) {
+            setIsPending(false);
             return;
         }
 
@@ -72,7 +77,7 @@ export default function Vote({ tokenId }: { tokenId: bigint }) {
             });
         }
 
-        await sendTransactionAsync({
+        const res = await sendTransactionAsync({
             to: VotingContract.address as `0x${string}`,
             data: encodeFunctionData({
                 abi: VotingContract.abi,
@@ -80,7 +85,17 @@ export default function Vote({ tokenId }: { tokenId: bigint }) {
                 args: [tokenId],
             }),
         });
+        console.log("Res: ", res);
     };
+
+    useEffect(() => {
+        if (isSuccess) {
+            setTimeout(() => {
+                revalidator.revalidate();
+                setIsPending(false);
+            }, 3000);
+        }
+    }, [isSuccess]);
 
     return (
         <div className="vote-button">
@@ -88,10 +103,15 @@ export default function Vote({ tokenId }: { tokenId: bigint }) {
                 <Button
                     onClick={async (e) => {
                         e.preventDefault();
-                        await vote(tokenId);
+                        try {
+                            setIsPending(true);
+                            await vote(tokenId);
+                        } catch (err) {
+                            setIsPending(false);
+                        }
                     }}
                 >
-                    Vote
+                    {isPending ? "Recording Vote..." : "Vote"}
                 </Button>
             ) : (
                 <>
