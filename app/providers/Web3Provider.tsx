@@ -14,10 +14,10 @@ const projectId = "b778fc38a24b6d5279eff7d14d0417ac";
 
 // 2. Create a metadata object - optional
 const metadata = {
-    name: "AppKit",
-    description: "AppKit Example",
-    url: "https://example.com", // origin must match your domain & subdomain
-    icons: ["https://avatars.githubusercontent.com/u/179229932"],
+    name: "Holiday Contest",
+    description: "Calypso Holiday Contest 2024",
+    url: "https://holiday.calypsohub.network", // origin must match your domain & subdomain
+    icons: ["https://avatars.githubusercontent.com/u/192562047"],
 };
 
 // 3. Set the networks
