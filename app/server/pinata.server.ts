@@ -5,20 +5,20 @@ const pinataGatewayURL = process.env.PINATA_GATEWAY_URL;
 const pinataIPFSGroup = process.env.PINATA_IPFS_GROUP;
 
 if (!pinataJWT) {
-  throw new Error("Missing Pinata JWT");
+    throw new Error("Missing Pinata JWT");
 }
 
 if (!pinataGatewayURL) {
-  throw new Error("Missing Pinata URL");
+    throw new Error("Missing Pinata URL");
 }
 
 if (!pinataIPFSGroup) {
-  throw new Error("Missing Pinata IPFS Group");
+    throw new Error("Missing Pinata IPFS Group");
 }
 
 export const pinata = new PinataSDK({
-  pinataJwt: pinataJWT,
-  pinataGateway: pinataGatewayURL
+    pinataJwt: pinataJWT,
+    pinataGateway: pinataGatewayURL,
 });
 
 export const ifpsGroup = pinataIPFSGroup;

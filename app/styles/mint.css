@@ -7,12 +7,26 @@
 }
 .left {
     width: 40%;
-    border-right: 1px solid #FFF;
+    border-right: 1px solid #fff;
     padding-right: 16px;
+
+    @media (max-width: 864px) {
+        width: 100%;
+        min-height: 450px;
+        height: auto;
+        border: none;
+    }
 }
 
 .right {
     width: 55%;
+
+    @media (max-width: 864px) {
+        width: 100%;
+        min-height: 200px;
+        height: auto;
+    }
+
     img {
         width: 50%;
         height: auto;

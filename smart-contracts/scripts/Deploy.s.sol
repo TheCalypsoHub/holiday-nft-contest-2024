@@ -25,6 +25,8 @@ contract DeployScript is Script {
             address(nft)
         );
 
+        nft.grantRole(nft.MINTER_ROLE(), 0xF8391E21Af05Ed0EE501251585A775dd26B33e23);
+
         vm.stopBroadcast();
 
         console.log("Deployment Complete...");

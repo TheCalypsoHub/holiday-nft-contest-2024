@@ -1,87 +1,63 @@
-import { log, BigInt } from '@graphprotocol/graph-ts';
-import { CalypsoHolidayNFT2024 as ERC721, Transfer as TransferEvent } from '../../generated/CalypsoHolidayNFT2024/CalypsoHolidayNFT2024';
-import { Token, Owner, Contract, Transfer } from '../../generated/schema';
+import { log, BigInt } from "@graphprotocol/graph-ts";
+import {
+  CalypsoHolidayNFT2024,
+  Transfer,
+} from "../../generated/CalypsoHolidayNFT2024/CalypsoHolidayNFT2024";
+import { Token, User } from "../../generated/schema";
 
-export function handleTransfer(event: TransferEvent): void {
-  log.debug('Transfer detected. From: {} | To: {} | TokenID: {}', [
-    event.params.from.toHexString(),
-    event.params.to.toHexString(),
-    event.params.tokenId.toHexString(),
-  ]);
+// Event handler for the Transfer event
+export function handleTransfer(event: Transfer): void {
+  let tokenId = event.params.tokenId.toString();
 
-  let previousOwner = Owner.load(event.params.from.toHexString());
-  let newOwner = Owner.load(event.params.to.toHexString());
-  let token = Token.load(event.params.tokenId.toHexString());
-  let transferId = event.transaction.hash
-    .toHexString()
-    .concat(':'.concat(event.transactionLogIndex.toHexString()));
-  let transfer = Transfer.load(transferId);
-  let contract = Contract.load(event.address.toHexString());
-  let instance = ERC721.bind(event.address);
+  // Load or create the Token entity
+  let token = Token.load(tokenId);
+  if (!token) {
+    token = new Token(tokenId);
+    token.tokenId = event.params.tokenId;
+    token.contractAddress = event.address.toHexString();
+    token.votes = BigInt.fromU32(0);
 
-  if (previousOwner == null) {
-    previousOwner = new Owner(event.params.from.toHexString());
+    // Fetch the tokenURI using the contract call
+    let contract = CalypsoHolidayNFT2024.bind(event.address);
+    let tokenURICallResult = contract.try_tokenURI(event.params.tokenId);
 
-    previousOwner.balance = BigInt.fromI32(0);
-  } else {
-    let prevBalance = previousOwner.balance;
-    if (prevBalance > BigInt.fromI32(0)) {
-      previousOwner.balance = prevBalance - BigInt.fromI32(1);
+    if (!tokenURICallResult.reverted) {
+      token.tokenURI = tokenURICallResult.value;
+    } else {
+      log.warning("tokenURI fetch reverted for tokenId {} on contract {}", [
+        tokenId,
+        event.address.toHexString(),
+      ]);
+      token.tokenURI = ""; // Set an empty value if the call reverts
     }
   }
 
-  if (newOwner == null) {
-    newOwner = new Owner(event.params.to.toHexString());
-    newOwner.balance = BigInt.fromI32(1);
-  } else {
-    let prevBalance = newOwner.balance;
-    newOwner.balance = prevBalance + BigInt.fromI32(1);
-  }
-
-  if (token == null) {
-    token = new Token(event.params.tokenId.toHexString());
-    token.contract = event.address.toHexString();
-
-    let uri = instance.try_tokenURI(event.params.tokenId);
-    if (!uri.reverted) {
-      token.uri = uri.value;
-    }
-  }
-
+  // Update token owner
   token.owner = event.params.to.toHexString();
 
-  if (transfer == null) {
-    transfer = new Transfer(transferId);
-    transfer.token = event.params.tokenId.toHexString();
-    transfer.from = event.params.from.toHexString();
-    transfer.to = event.params.to.toHexString();
-    transfer.timestamp = event.block.timestamp;
-    transfer.block = event.block.number;
-    transfer.transactionHash = event.transaction.hash.toHexString();
-  }
-
-  if (contract == null) {
-    contract = new Contract(event.address.toHexString());
-  }
-
-  let name = instance.try_name();
-  if (!name.reverted) {
-    contract.name = name.value;
-  }
-
-  let symbol = instance.try_symbol();
-  if (!symbol.reverted) {
-    contract.symbol = symbol.value;
-  }
-
-  let totalSupply = instance.try_totalSupply();
-  if (!totalSupply.reverted) {
-    contract.totalSupply = totalSupply.value;
-  }
-
-  previousOwner.save();
-  newOwner.save();
+  // Save the token
   token.save();
-  contract.save();
-  transfer.save();
+
+  // Load or create the 'from' User entity
+  let fromUser = User.load(event.params.from.toHexString());
+  if (!fromUser) {
+    fromUser = new User(event.params.from.toHexString());
+    fromUser.balance = 0;
+  }
+  if (
+    event.params.from.toHexString() !=
+    "0x0000000000000000000000000000000000000000"
+  ) {
+    fromUser.balance -= 1;
+  }
+  fromUser.save();
+
+  // Load or create the 'to' User entity
+  let toUser = User.load(event.params.to.toHexString());
+  if (!toUser) {
+    toUser = new User(event.params.to.toHexString());
+    toUser.balance = 0;
+  }
+  toUser.balance += 1;
+  toUser.save();
 }

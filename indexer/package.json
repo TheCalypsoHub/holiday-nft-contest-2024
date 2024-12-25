@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@goldskycom/cli": "^11.1.0",
     "@graphprotocol/graph-cli": "^0.93.3",
     "@graphprotocol/graph-ts": "^0.37.0",
     "prettier": "^3.4.2",

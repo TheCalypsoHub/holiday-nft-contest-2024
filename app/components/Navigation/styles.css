@@ -1,5 +1,5 @@
 .navbar {
-    background: #0E1111;
+    background: #0e1111;
     width: 100vw;
 }
 
@@ -53,7 +53,6 @@
     color: var(--white);
 }
 
-
 .navbar-toggle {
     display: none;
     flex-direction: column;
@@ -64,13 +63,12 @@
 .bar {
     width: 25px;
     height: 3px;
-    background-color: #FFF;
+    background-color: #fff;
     margin: 2px 0;
     transition: 0.4s;
 }
 
 @media screen and (max-width: 1024px) {
-
     .navbar-menu {
         display: none;
         flex-direction: column;
@@ -79,7 +77,7 @@
         top: 70px;
         height: auto;
         left: 0;
-        background: #0E1111;
+        background: #0e1111;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 

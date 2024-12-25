@@ -21,9 +21,9 @@ body {
         --card-foreground: 220 13% 91%; /* Light silver */
         --popover: 220 17% 20%; /* Matches card */
         --popover-foreground: 220 13% 91%; /* Light silver */
-        --primary: #DD1173; /* Pink */
+        --primary: #dd1173; /* Pink */
         --primary-foreground: 220 13% 91%; /* Light silver */
-        --secondary: #350E47; /* Purple */
+        --secondary: #350e47; /* Purple */
         --secondary-foreground: 220 13% 91%; /* Light silver */
         --muted: 220 17% 25%; /* Matches secondary */
         --muted-foreground: 220 15% 65%; /* Mid silver */
@@ -92,8 +92,7 @@ body {
         @apply bg-background text-foreground;
         width: 100vw;
         overflow-x: hidden;
-        max-width:100%;  /* added */
-
+        max-width: 100%; /* added */
     }
 }
 
@@ -144,6 +143,8 @@ h6 {
 p {
     font-family: var(--font-primary);
     font-weight: var(--font-weight-normal);
+    position: relative;
+    z-index: 10000000000000;
 }
 
 label {
@@ -241,4 +242,8 @@ small {
     margin-top: 50px;
     position: relative;
     z-index: 1;
+
+    @media (max-width: 768px) {
+        max-width: 90%;
+    }
 }
