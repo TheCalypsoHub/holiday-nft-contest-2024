@@ -31,20 +31,22 @@ export default function Home() {
             <br />
             <h3>How it Works</h3>
             <ol>
-                <li>Minting opens Dec 25 at 9 AM PST</li>
+                <li>Minting opens Dec 26 at 9 AM PST</li>
                 <li>
                     Head over to the <a href="/mint">Mint</a> page and mint your
                     NFT
                 </li>
-                <li>Minting closes and voting opens Jan 2 at 12 PM PST</li>
+                <li>Minting closes on Jan 2 at 12 PM PST</li>
                 <li>
                     Head over to the <a href="/vote">Vote</a> page to vote on
                     your favorite
                 </li>
-                <li>Voting closes January 6 at 12 PM PST</li>
+                <li>Voting closes January 4 at 12 PM PST</li>
                 <li>
-                    Winners will be announced on January 7 at 9 AM PST. Reward
-                    will be AUTOMATICALLY DISTRIBUTED to the linked wallet
+                    Winners will be announced on January 5 at 9 AM PST. SKL
+                    Rewards will be AUTOMATICALLY DISTRIBUTED to the linked
+                    wallet within 48 hours. NFT associated have no explicit mint
+                    dates or distribution time.
                 </li>
             </ol>
             <br />
