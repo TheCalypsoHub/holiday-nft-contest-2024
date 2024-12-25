@@ -153,7 +153,7 @@ export default function Mint() {
                                 type="submit"
                                 disabled={fetcher.state === "submitting"}
                             >
-                                Mint NFT
+                                Upload Image &amp; Mint NFT
                             </button>
                         </fetcher.Form>
                     </div>
