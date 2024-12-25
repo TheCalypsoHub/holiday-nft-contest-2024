@@ -31,7 +31,7 @@ export default function Home() {
             <br />
             <h3>How it Works</h3>
             <ol>
-                <li>Minting opens Dec 26 at 9 AM PST</li>
+                <li>Minting is now open!</li>
                 <li>
                     Head over to the <a href="/mint">Mint</a> page and mint your
                     NFT
