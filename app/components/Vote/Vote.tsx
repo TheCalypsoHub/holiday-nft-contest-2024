@@ -13,14 +13,9 @@ import {
 } from "viem";
 import { skaleCalypso, skaleCalypsoTestnet } from "viem/chains";
 import mineGasForTransaction from "./miner";
-import { abi } from "../../../smart-contracts/out/CalypsoHolidayVoting2024.sol/CalypsoHolidayVoting2024.json";
-import testnetDeployments from "../../../smart-contracts/broadcast/Deploy.s.sol/974399131/run-latest.json";
-import mainnetDeployments from "../../../smart-contracts/broadcast/Deploy.s.sol/974399131/run-latest.json"; // Update
+import VotingContract from "~/contracts/voting";
 
 const isMainnet = process.env.NETWORK === "mainnet";
-const contractAddress = isMainnet
-    ? mainnetDeployments.transactions[1].contractAddress
-    : testnetDeployments.transactions[1].contractAddress;
 
 export default function Vote({ tokenId }: { tokenId: bigint }) {
     const { isConnected, address } = useAccount();
@@ -78,9 +73,9 @@ export default function Vote({ tokenId }: { tokenId: bigint }) {
         }
 
         await sendTransactionAsync({
-            to: contractAddress as `0x${string}`,
+            to: VotingContract.address as `0x${string}`,
             data: encodeFunctionData({
-                abi,
+                abi: VotingContract.abi,
                 functionName: "vote",
                 args: [tokenId],
             }),
