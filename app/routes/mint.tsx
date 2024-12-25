@@ -54,7 +54,7 @@ export async function action({ request }: Route.ActionArgs) {
     const fileType = `${upload.name.split(".")[1]}`;
     let fileName = `${nextTokenId}.${fileType}`;
 
-    if (fileType !== "svg") {
+    if (["png", "jpeg", "jpg"].includes(fileType)) {
         const webp = await sharp(await upload.arrayBuffer())
             .webp()
             .toBuffer();
@@ -70,6 +70,17 @@ export async function action({ request }: Route.ActionArgs) {
         upload = new File([blob], fileName, {
             type: "image/webp",
         });
+    }
+
+    if (upload.size > 1 * 1024 * 1024) {
+        throw data(
+            {
+                error: "File Must be <1mb",
+            },
+            {
+                status: 400,
+            }
+        );
     }
 
     await uploadObject(upload, fileName);
