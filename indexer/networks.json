@@ -1,8 +1,12 @@
 {
   "skale-calypso": {
     "CalypsoHolidayNFT2024": {
-      "address": "",
-      "startBlock": 18500000
+      "address": "0xe703b2ab81cb9733d55f489958bc68397172829c",
+      "startBlock": 19135000
+    },
+    "CalypsoHolidayVoting2024": {
+      "address": "0xeae817e91731a55796bead806dadb8f00862fa22",
+      "startBlock": 19135000
     }
   },
   "skale-calypso-testnet": {

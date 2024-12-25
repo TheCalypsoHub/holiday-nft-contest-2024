@@ -9,11 +9,11 @@ features:
 dataSources:
   - kind: ethereum/contract
     name: CalypsoHolidayNFT2024
-    network: skale-calypso-testnet
+    network: skale-calypso
     source:
-      address: "0xb5379445AFaF2C564Cabfe9303dc3c768E3B47fE"
+      address: "0xe703b2ab81cb9733d55f489958bc68397172829c"
       abi: CalypsoHolidayNFT2024
-      startBlock: 2849875
+      startBlock: 19135000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -30,11 +30,11 @@ dataSources:
       file: CalypsoHolidayNFT2024/CalypsoHolidayNFT2024.wasm
   - kind: ethereum/contract
     name: CalypsoHolidayVoting2024
-    network: skale-calypso-testnet
+    network: skale-calypso
     source:
-      address: "0xf53D3D9c510D76F55D9695F9b823565dC3FA9D07"
+      address: "0xeae817e91731a55796bead806dadb8f00862fa22"
       abi: CalypsoHolidayVoting2024
-      startBlock: 2849875
+      startBlock: 19135000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6

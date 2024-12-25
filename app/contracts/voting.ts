@@ -192,5 +192,7 @@ export default {
             inputs: [],
         },
     ],
-    address: isMainnet ? "" : "0xf53D3D9c510D76F55D9695F9b823565dC3FA9D07",
+    address: isMainnet
+        ? "0xeae817e91731a55796bead806dadb8f00862fa22"
+        : "0xf53D3D9c510D76F55D9695F9b823565dC3FA9D07",
 };
