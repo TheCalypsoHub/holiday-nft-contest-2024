@@ -121,6 +121,12 @@ export default function Mint() {
                             <li>Upload Image</li>
                             <li>Click Mint</li>
                         </ol>
+                        <small>
+                            Note, NSFW/inappropriate graphics will not be
+                            allowed. The contest operators reserve the right to
+                            replace any graphics that they deem to be
+                            unacceptable
+                        </small>
                         <br />
                         <br />
                         <fetcher.Form
