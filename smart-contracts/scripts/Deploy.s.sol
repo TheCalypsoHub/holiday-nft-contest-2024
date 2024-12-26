@@ -12,8 +12,6 @@ contract DeployScript is Script {
     function run() public {
 
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        // address deployerAddress = vm.addr(deployerPrivateKey);
-
         vm.startBroadcast(deployerPrivateKey);
 
         nft = new CalypsoHolidayNFT2024(

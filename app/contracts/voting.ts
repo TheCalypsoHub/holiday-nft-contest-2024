@@ -1,5 +1,3 @@
-const isMainnet = process.env.NETWORK === "mainnet";
-
 export default {
     abi: [
         {
@@ -33,13 +31,6 @@ export default {
         },
         {
             type: "function",
-            name: "hasVoted",
-            inputs: [{ name: "", type: "address", internalType: "address" }],
-            outputs: [{ name: "", type: "bool", internalType: "bool" }],
-            stateMutability: "view",
-        },
-        {
-            type: "function",
             name: "lockVoting",
             inputs: [],
             outputs: [],
@@ -56,6 +47,13 @@ export default {
                     internalType: "contract IERC721",
                 },
             ],
+            stateMutability: "view",
+        },
+        {
+            type: "function",
+            name: "numberVotes",
+            inputs: [{ name: "", type: "address", internalType: "address" }],
+            outputs: [{ name: "", type: "uint8", internalType: "uint8" }],
             stateMutability: "view",
         },
         {
@@ -192,8 +190,5 @@ export default {
             inputs: [],
         },
     ],
-    address: "0xeae817e91731a55796bead806dadb8f00862fa22",
-    // address: isMainnet
-    //     ? "0xeae817e91731a55796bead806dadb8f00862fa22"
-    //     : "0xf53D3D9c510D76F55D9695F9b823565dC3FA9D07",
+    address: "0x6420331E7008F5c887Cc8e70879A722C2ef6A800",
 };

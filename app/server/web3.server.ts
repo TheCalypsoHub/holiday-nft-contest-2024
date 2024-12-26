@@ -6,10 +6,9 @@ import {
     parseEventLogs,
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { skaleCalypso, skaleCalypsoTestnet } from "viem/chains";
+import { skaleCalypso } from "viem/chains";
 import NFTContract from "~/contracts/nft";
 
-const network = process.env.NETWORK;
 const privateKey = process.env.PRIVATE_KEY;
 
 if (privateKey === undefined) {
@@ -20,15 +19,13 @@ if (!privateKey.startsWith("0x")) {
     throw new Error("Private Key Must Start with 0x");
 }
 
-const isMainnet = network === "mainnet";
-
 const publicClient = createPublicClient({
-    chain: isMainnet ? skaleCalypso : skaleCalypsoTestnet,
+    chain: skaleCalypso,
     transport: http(),
 });
 
 const walletClient = createWalletClient({
-    chain: isMainnet ? skaleCalypso : skaleCalypsoTestnet,
+    chain: skaleCalypso,
     transport: http(),
     account: privateKeyToAccount(privateKey as `0x${string}`),
 });

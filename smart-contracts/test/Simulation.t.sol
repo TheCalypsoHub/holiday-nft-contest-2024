@@ -71,10 +71,10 @@ contract Simulation is Test {
         assertEq(calypsoHolidayVoting2024.votes(1), 0);
         assertEq(calypsoHolidayVoting2024.votes(2), 3);
 
-        assertEq(calypsoHolidayVoting2024.hasVoted(address(0x1)), true);
-        assertEq(calypsoHolidayVoting2024.hasVoted(address(0x2)), true);
-        assertEq(calypsoHolidayVoting2024.hasVoted(address(0x3)), true);
-        assertEq(calypsoHolidayVoting2024.hasVoted(address(this)), false);
+        assertEq(calypsoHolidayVoting2024.numberVotes(address(0x1)), 1);
+        assertEq(calypsoHolidayVoting2024.numberVotes(address(0x2)), 1);
+        assertEq(calypsoHolidayVoting2024.numberVotes(address(0x3)), 1);
+        assertEq(calypsoHolidayVoting2024.numberVotes(address(this)), 0);
 
         assertEq(calypsoHolidayVoting2024.topTokens(0), 2);
 
