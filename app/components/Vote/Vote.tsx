@@ -93,13 +93,16 @@ export default function Vote({ tokenId }: { tokenId: bigint }) {
         }, 5000);
 
         setTimeout(() => {
-            setIsPending(false);
             revalidator.revalidate();
         }, 10000);
 
         setTimeout(() => {
             revalidator.revalidate();
         }, 15000);
+
+        alert("Vote Confirmed. Count will update momentarily!");
+
+        setIsPending(false);
     };
 
     return (
