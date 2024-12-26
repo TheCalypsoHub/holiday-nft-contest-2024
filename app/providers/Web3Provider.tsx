@@ -1,11 +1,10 @@
 import { createAppKit } from "@reown/appkit/react";
 
 import { WagmiProvider } from "wagmi";
-import { skaleCalypso, skaleCalypsoTestnet } from "@reown/appkit/networks";
+import { skaleCalypso } from "@reown/appkit/networks";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 
-const isMainnet = process.env.NETWORK === "mainnet";
 // 0. Setup queryClient
 const queryClient = new QueryClient();
 
@@ -21,10 +20,7 @@ const metadata = {
 };
 
 // 3. Set the networks
-const networks = [
-    isMainnet ? skaleCalypso : skaleCalypsoTestnet,
-    ...[isMainnet ? skaleCalypso : skaleCalypsoTestnet],
-];
+const networks = [skaleCalypso, ...[skaleCalypso]];
 
 // 4. Create Wagmi Adapter
 const wagmiAdapter = new WagmiAdapter({
@@ -36,11 +32,8 @@ const wagmiAdapter = new WagmiAdapter({
 // 5. Create modal
 createAppKit({
     adapters: [wagmiAdapter],
-    defaultNetwork: isMainnet ? skaleCalypso : skaleCalypsoTestnet,
-    networks: [
-        isMainnet ? skaleCalypso : skaleCalypsoTestnet,
-        ...[isMainnet ? skaleCalypso : skaleCalypsoTestnet],
-    ],
+    defaultNetwork: skaleCalypso,
+    networks: [skaleCalypso, ...[skaleCalypso]],
     projectId,
     metadata,
     features: {
