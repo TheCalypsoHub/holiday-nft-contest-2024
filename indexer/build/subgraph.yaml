@@ -32,7 +32,7 @@ dataSources:
     name: CalypsoHolidayVoting2024
     network: skale-calypso
     source:
-      address: "0xeae817e91731a55796bead806dadb8f00862fa22"
+      address: "0x6420331E7008F5c887Cc8e70879A722C2ef6A800"
       abi: CalypsoHolidayVoting2024
       startBlock: 19135000
     mapping:

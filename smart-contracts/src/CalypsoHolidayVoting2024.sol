@@ -22,7 +22,7 @@ contract CalypsoHolidayVoting2024 is Ownable, ReentrancyGuard {
     uint256[250] public topTokens;
     
     // Mapping to track if an address has voted
-    mapping(address => bool) public hasVoted;
+    mapping(address => uint8) public numberVotes;
     
     // Event emitted when a vote is cast
     event VoteCast(address indexed voter, uint256 indexed tokenId);
@@ -57,12 +57,12 @@ contract CalypsoHolidayVoting2024 is Ownable, ReentrancyGuard {
         }
         
         // Check if wallet has already voted
-        if (hasVoted[msg.sender]) {
-            revert("Address has already voted");
+        if (numberVotes[msg.sender] == 3) {
+            revert("Address has already voted 3 times");
         }
         
         // Mark address as having voted
-        hasVoted[msg.sender] = true;
+        numberVotes[msg.sender] += 1;
         
         // Increment vote count for token
         votes[tokenId]++;

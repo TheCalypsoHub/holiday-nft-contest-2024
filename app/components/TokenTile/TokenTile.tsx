@@ -1,4 +1,3 @@
-import { useAccount, useReadContract } from "wagmi";
 import Vote from "../Vote/Vote";
 import "./TokenTile.css";
 import VotingContract from "~/contracts/voting";
@@ -15,14 +14,7 @@ export type Token = {
 };
 
 export default function TokenTile({ token }: { token: Token }) {
-    const { address } = useAccount();
-
-    const { data: hasVoted } = useReadContract({
-        abi: VotingContract.abi,
-        address: VotingContract.address as `0x${string}`,
-        functionName: "hasVoted",
-        args: [address],
-    });
+    const hasVoted = false;
 
     return (
         <div className="nftTile">

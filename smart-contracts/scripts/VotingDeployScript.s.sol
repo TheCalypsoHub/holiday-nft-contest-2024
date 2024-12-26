@@ -11,17 +11,10 @@ contract VotingDeployScript is Script {
     function setUp() public {}
 
     function run() public {
-        vm.startBroadcast();
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
 
-        nft = new CalypsoHolidayNFT2024(
-            "Calypso Holiday NFT 2024",
-            "HOLIDAY",
-            address(this)
-        );
-
-        calypsoHolidayVoting2024 = new CalypsoHolidayVoting2024(
-            address(nft)
-        );
+        calypsoHolidayVoting2024 = new CalypsoHolidayVoting2024(0xE703B2AB81Cb9733d55f489958Bc68397172829C);
 
         vm.stopBroadcast();
     }
