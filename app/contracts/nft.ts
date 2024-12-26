@@ -767,7 +767,8 @@ export default {
         { type: "error", name: "EnforcedPause", inputs: [] },
         { type: "error", name: "ExpectedPause", inputs: [] },
     ],
-    address: isMainnet
-        ? "0xe703b2ab81cb9733d55f489958bc68397172829c"
-        : "0xb5379445AFaF2C564Cabfe9303dc3c768E3B47fE",
+    address: "0xe703b2ab81cb9733d55f489958bc68397172829c",
+    // address: isMainnet
+    //     ? "0xe703b2ab81cb9733d55f489958bc68397172829c"
+    //     : "0xb5379445AFaF2C564Cabfe9303dc3c768E3B47fE",
 };
